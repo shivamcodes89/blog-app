@@ -1,0 +1,15 @@
+services:
+  - type: web
+    name: my-blog-backend
+    env: node
+    buildCommand: npm install
+    startCommand: npm start
+    envVars:
+      - key: MONGO_URI
+        value: your_mongo_uri_here
+      - key: JWT_SECRET
+        value: mysecretkey123
+      - key: EMAIL_USER
+        value: youremail@gmail.com
+      - key: EMAIL_PASS
+        value: your_app_password
