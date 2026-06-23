@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback } from "react";
 import { getBlogs, createBlog, updateBlog, deleteBlog } from '../api';
 import { useNavigate } from 'react-router-dom';
 
@@ -256,16 +256,18 @@ function Dashboard() {
   const [isSuccess, setIsSuccess] = useState(false);
   const navigate = useNavigate();
 
-  useEffect(() => { fetchBlogs(); }, []);
 
-  const fetchBlogs = async () => {
+  const fetchBlogs = useCallback(async () => {
     try {
       const res = await getBlogs();
       setBlogs(res.data);
     } catch {
-      navigate('/');
+    navigate("/");
     }
-  };
+  }, [navigate]);
+  useEffect(() => {
+    fetchBlogs();
+  }, [fetchBlogs]);
 
   const handleSave = async () => {
     if (!title || !content) { setMessage('Please fill in both fields'); setIsSuccess(false); return; }
