@@ -256,9 +256,14 @@ function Dashboard() {
   const [isSuccess, setIsSuccess] = useState(false);
   const navigate = useNavigate();
 
-  useEffect(() => { fetchBlogs(); }, []);
+  
 
-  const fetchBlogs = async () => {
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+useEffect(() => {
+  fetchBlogs();
+}, []);
+
+const fetchBlogs = async () => {
     try {
       const res = await getBlogs();
       setBlogs(res.data);
